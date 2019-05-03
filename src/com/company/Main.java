@@ -1,14 +1,19 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.RecursiveAction;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        ArrayList<Resume> resumes = new ArrayList<>();
+        HashMap<String, Resume> resumes = new HashMap<String, Resume>();
+//        ArrayList<Resume> resumes = new ArrayList<>();
+
+
 
         String userInput = "";
         String educationAdd;
@@ -16,8 +21,9 @@ public class Main {
         String descriptionInput;
 
         String skillInput;
+        String changeInput;
         String displayResume;
-        int resumeNumber = 0;
+        String resumeName;
 
 
         while(!userInput.equalsIgnoreCase("n")){
@@ -33,7 +39,9 @@ public class Main {
                 String name = scanner.nextLine();
                 System.out.println("Email: ");
                 String email = scanner.nextLine();
-                resumeInfo = new Personal(name, email);
+                System.out.println("Phone Number: ");
+                String phone = scanner.nextLine();
+                resumeInfo = new Personal(name, email, phone);
                 resume.addPersonalInfo(resumeInfo);
 
                 educationAdd = "";
@@ -118,19 +126,64 @@ public class Main {
                         resume.addSkills(skills);
                     }
                 }
-                resumes.add(resume);
+                resumes.put(name,resume);
 
             }
+        }
+
+        changeInput = "";
+        while (!changeInput.equalsIgnoreCase("n")){
+            System.out.println("Would you like to make changes to an existing resume? (y/n)");
+            changeInput = scanner.nextLine();
+            if (changeInput.equalsIgnoreCase("y")){
+                System.out.println("What is the name of the Resume:");
+                resumeName = scanner.nextLine();
+                System.out.println("Are you changing your name? (y/n)");
+                String n = scanner.nextLine();
+                if (n.equalsIgnoreCase("y")){
+                    System.out.println("New Name:");
+                    resumes.get(resumeName).personalInfo.get(0).setName(scanner.nextLine());
+                }
+                System.out.println("Are you changing your email? (y/n)");
+                String e = scanner.nextLine();
+                if (e.equalsIgnoreCase("y")){
+                    System.out.println("New Email:");
+                    resumes.get(resumeName).personalInfo.get(0).setEmail(scanner.nextLine());
+                }
+                System.out.println("Are you changing your phone number? (y/n)");
+                String p = scanner.nextLine();
+                if (p.equalsIgnoreCase("y")){
+                    System.out.println("New Phone Number:");
+                    resumes.get(resumeName).personalInfo.get(0).setPhone(scanner.nextLine());
+                }
+                resumes.get(resumeName);
+            }
+        }
+
+        Recruiter recruiter = new Recruiter();
+        System.out.println("Are you a recruiter? (y/n)");
+        String r = scanner.nextLine();
+        if (r.equalsIgnoreCase("y")){
+            System.out.println("What Skill are you looking for?");
+            String s = scanner.nextLine();
+            recruiter.skillCheck(s);
         }
 
 
         System.out.println("Would you like to display the resumes? (y/n)");
         displayResume = scanner.nextLine();
-        if (displayResume.equalsIgnoreCase("y")){
-            for (Resume r: resumes){
-                r.displayResume();
+        if (displayResume.equalsIgnoreCase("y")) {
+            for (HashMap.Entry<String, Resume> resume : resumes.entrySet()) {
+                resume.getValue().displayResume();
+                System.out.println();
+
             }
         }
+//        if (displayResume.equalsIgnoreCase("y")){
+//            for (Resume r: resumes){
+//                r.displayResume();
+//            }
+//        }
 
 //        while (!displayResume.equalsIgnoreCase("n")){
 //            System.out.println();

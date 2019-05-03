@@ -35,6 +35,7 @@ public class Resume {
 
 
 
+
     public Personal getPersonalInfo(int i) {
         return personalInfo.get(i);
     }

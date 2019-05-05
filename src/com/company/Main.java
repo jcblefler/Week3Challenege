@@ -11,6 +11,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         HashMap<String, Resume> resumes = new HashMap<String, Resume>();
+        ArrayList<Resume> recruiterList = new ArrayList<>();
 //        ArrayList<Resume> resumes = new ArrayList<>();
 
 
@@ -126,7 +127,8 @@ public class Main {
                         resume.addSkills(skills);
                     }
                 }
-                resumes.put(name,resume);
+                resumes.put(name, resume);
+                recruiterList.add(resume);
 
             }
         }
@@ -166,7 +168,7 @@ public class Main {
         if (r.equalsIgnoreCase("y")){
             System.out.println("What Skill are you looking for?");
             String s = scanner.nextLine();
-            recruiter.skillCheck(s);
+            recruiter.skillCheck(recruiterList, s);
         }
 
 

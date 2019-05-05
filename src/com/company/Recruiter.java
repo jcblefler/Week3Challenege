@@ -5,19 +5,8 @@ import java.util.HashMap;
 
 public class Recruiter extends Main{
 
-    Resume resume = new Resume();
-    Skills skills = new Skills();
     ArrayList<String> namesFound = new ArrayList<>();
-    HashMap<String, Resume> resumes = new HashMap<String, Resume>();
-    String nameList;
-
-    public String getNameList() {
-        return nameList;
-    }
-
-    public void setNameList(String nameList) {
-        this.nameList = nameList;
-    }
+    private ArrayList<Resume> recruiterResumes = new ArrayList<Resume>();
 
 
 
@@ -25,26 +14,42 @@ public class Recruiter extends Main{
     public Recruiter() {
     }
 
-    public void skillCheck(String skill){
 
-//        for (HashMap.Entry<String, Resume> r : resumes.entrySet()){
-//
-//            for (int i = 0; i < resume.skills.size(); i++){
-//                if (skill.equalsIgnoreCase(skills.getSkillName())){
-//                    namesFound.add(r.getValue().personalInfo.get(0).getName());
-//                }
-//            }
-//
-//        }
-//
-//        for (String w : namesFound){
-//            setNameList(getNameList() + w);
-//        }
 
-        System.out.println();
+    public void skillCheck(ArrayList<Resume> resumes, String skill){
 
-        System.out.println(getNameList());
+        for (Resume resume : resumes) {
+            for (String s : resume.displaySKills()) {
+                if (skill.equalsIgnoreCase(s)) {
+                    addNamesFound(resume.getPersonalInfo(0).getName());
+                }
+            }
+
+            System.out.println();
+
+        }
+
+        for (String s : namesFound) {
+            System.out.println(s);
+        }
     }
 
+
+
+    public String getNamesFound(int i) {
+        return namesFound.get(i);
+    }
+
+    public void addNamesFound(String name) {
+       namesFound.add(name);
+    }
+
+    public Resume getRecruiterResumes(int i) {
+        return recruiterResumes.get(i);
+    }
+
+    public void addRecruiterResumes(Resume resumes) {
+       recruiterResumes.add(resumes);
+    }
 
 }

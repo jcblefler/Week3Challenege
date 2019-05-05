@@ -33,7 +33,13 @@ public class Resume {
         }
     }
 
-
+    public ArrayList<String> displaySKills() {
+        ArrayList<String> skillList = new ArrayList<>();
+        for (Skills skill : skills) {
+            skillList.add(skill.getSkillName());
+        }
+        return skillList;
+    }
 
 
     public Personal getPersonalInfo(int i) {

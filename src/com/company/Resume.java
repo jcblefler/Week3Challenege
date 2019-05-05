@@ -9,12 +9,15 @@ public class Resume {
     ArrayList<Experience> experiences = new ArrayList<>();
     ArrayList<Skills> skills = new ArrayList<>();
 
+    private String competencyLevel;
+
+    //Empty Constructor
     public Resume(){
 
     }
 
 
-
+    //Method to get info from all parts of the resume and prints them out
     public void displayResume(){
         for (Personal p: personalInfo){
             p.displayPersonal();
@@ -33,12 +36,22 @@ public class Resume {
         }
     }
 
+    //Method to add skills into an ArrayList to use in Recruiter Class
     public ArrayList<String> displaySKills() {
         ArrayList<String> skillList = new ArrayList<>();
         for (Skills skill : skills) {
             skillList.add(skill.getSkillName());
         }
         return skillList;
+    }
+
+    //Method to add competency level to display with Recruiter Class
+    //Not implemented yet
+    public String displayCompetency() {
+        for (Skills skill : skills) {
+            setCompetencyLevel(skill.getSkillCompetency());
+        }
+        return getCompetencyLevel();
     }
 
 
@@ -72,5 +85,13 @@ public class Resume {
 
     public void addSkills(Skills skl) {
         skills.add(skl);
+    }
+
+    public String getCompetencyLevel() {
+        return competencyLevel;
+    }
+
+    public void setCompetencyLevel(String competencyLevel) {
+        this.competencyLevel = competencyLevel;
     }
 }
